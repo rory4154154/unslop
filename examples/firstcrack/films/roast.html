@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Current roast</title>
+<link rel="stylesheet" href="frame.css">
+<script src="curve.js"></script>
+<style>
+.plate { width: 928px; height: 444px; }
+html.live .plate { transition: height 650ms cubic-bezier(0.3, 1.1, 0.45, 1); }
+.stage { zoom: 1.45; width: 640px; height: 306px; padding: 20px; background: #F9FAFB; }
+.s2 .stage { font-family: 'Instrument Sans', sans-serif; }
+.s4 .plate { height: 519px; } .s4 .stage { height: 358px; background: #fff; }
+
+.card { position: relative; height: 266px; background: #fff; border: 1px solid #E5E7EB; border-radius: 18px; box-shadow: 0 4px 14px rgba(17,24,39,.06); }
+.s4 .card { height: 318px; background: var(--drum); border-color: var(--drum); box-shadow: none; border-radius: 14px; }
+.card > * { position: absolute; }
+.h3 { left: 20px; top: 18px; font-size: 17px; font-weight: 700; color: #111827; white-space: nowrap; }
+.s2 .h3 { font-size: 16px; font-weight: 500; color: var(--fc-ink); }
+.s4 .h3 { color: var(--drum-ink); }
+.sub { left: 20px; top: 44px; font-size: 13px; color: #6B7280; white-space: nowrap; }
+.s2 .sub { left: 122px; top: 21px; font-family: var(--mono); font-size: 12.5px; color: var(--fc-ink-3); }
+.s4 .sub { color: var(--drum-ink-2); }
+
+.status { right: 20px; top: 20px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #C2410C; background: #FFEDD5; border-radius: 12px; padding: 4px 10px; white-space: nowrap; animation: pu 1.2s infinite; }
+@keyframes pu { 50% { opacity: .35; } }
+.status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.s1 .status { animation: none; background: transparent; color: var(--fc-ink-3); font-weight: 400; font-size: 12.5px; padding: 4px 0; gap: 8px; }
+.s1 .status .dot { background: var(--ember); }
+.s4 .status { color: var(--drum-ink-2); }
+.s4 .status .dot { background: #E8743B; }
+
+.prog { left: 20px; right: 20px; top: 78px; }
+.prog .lb { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; color: #4B5563; margin-bottom: 7px; }
+.bar { height: 10px; border-radius: 5px; background: #EEF2FF; overflow: hidden; }
+.bar i { display: block; width: 64%; height: 100%; border-radius: 5px; background: linear-gradient(90deg, #6366F1, #A855F7, #EC4899); }
+.s4 .prog { opacity: 0; transform: translateY(-8px) scaleY(.6); }
+
+.tile { top: 122px; width: 131px; height: 62px; background: #F9FAFB; border: 1px solid #F3F4F6; border-radius: 14px; }
+.t1 { left: 20px; } .t2 { left: 163px; } .t3 { left: 306px; } .t4 { left: 449px; }
+.tile .k { position: absolute; left: 12px; top: 10px; font-size: 12px; color: #6B7280; font-weight: 500; white-space: nowrap; display: flex; gap: 5px; align-items: center; }
+.tile .k .em { display: inline-block; overflow: hidden; width: 16px; }
+.tile .n { position: absolute; left: 12px; top: 28px; font-size: 19px; font-weight: 700; color: #111827; white-space: nowrap; line-height: 1.2; }
+.s3 .tile { background: transparent; border-color: transparent; }
+.s3 .tile .k { left: 0; top: 34px; gap: 0; font-weight: 400; font-size: 12px; color: var(--fc-ink-3); }
+.s3 .tile .k .em { width: 0; opacity: 0; }
+.s3 .tile .n { left: 0; top: 0; font-family: var(--mono); font-weight: 500; font-size: 21px; color: var(--fc-ink); }
+.s3 .t1 .n { font-size: 28px; top: -6px; } .s3 .t1 .k { top: 34px; }
+.s3 .t1 { left: 20px; } .s3 .t2 { left: 170px; } .s3 .t3 { left: 262px; } .s3 .t4 { left: 400px; }
+.s4 .tile { top: 62px; }
+.s4 .tile .n { color: var(--drum-ink); } .s4 .tile .k { color: var(--drum-ink-2); }
+.s5 .t4 { left: 300px; top: 150px; opacity: 0; transform: scale(.8); }
+
+.spark { left: 20px; top: 202px; width: 440px; height: 44px; }
+.more { right: 20px; top: 214px; color: #6366F1; font-weight: 600; font-size: 13px; }
+.s4 .spark { opacity: 0; transform: translateY(20px) scaleY(2.5); transform-origin: bottom left; }
+.s4 .more { opacity: 0; }
+
+.chart { left: 20px; top: 128px; opacity: 0; }
+.s4 .chart { opacity: 1; transition-delay: 250ms !important; }
+.chart .act { transition: stroke-dashoffset 1300ms cubic-bezier(0.45, 0, 0.2, 1) 300ms !important; }
+.s4 .chart .act { stroke-dashoffset: 0 !important; }
+.chart .now, .chart .plan, .chart .drop { opacity: 0; }
+.s4 .chart .now, .s4 .chart .plan, .s4 .chart .drop { opacity: 1; transition: opacity 500ms ease 1400ms !important; }
+.chart .fc { opacity: 0; }
+.s5 .chart .fc { opacity: 1; transition: opacity 500ms ease 250ms !important; }
+</style></head>
+<body>
+<div class="frame">
+  <div class="cap"><div><div class="k">Firstcrack · unslop</div><h1>Current roast</h1></div><span class="count" data-counter>Before</span></div>
+  <div class="plate"><div class="stage slop">
+    <div class="card" id="card">
+      <div class="h3" id="h3"><span class="swap" data-at="2"><span class="from">🔥 Current Roast</span><span class="to">Guji Natural</span></span></div>
+      <div class="sub" id="sub"><span class="swap" data-at="2"><span class="from">Batch #B-1184 · Ethiopia Guji Natural · 12 kg</span><span class="to">B-1184 · 12 kg</span></span></div>
+      <div class="status" id="status"><span class="dot"></span><span class="swap" data-at="1"><span class="from">In Progress</span><span class="to">In the drum</span></span></div>
+      <div class="prog" id="prog"><div class="lb"><span>Roast Progress</span><span>64%</span></div><div class="bar"><i></i></div></div>
+      <div class="tile t1" id="t1"><div class="k"><span class="em">🌡️</span><span class="swap" data-at="3"><span class="from">Bean Temp</span><span class="to">Bean temperature</span></span></div><div class="n">204°C</div></div>
+      <div class="tile t2"><div class="k"><span class="em">⏱️</span><span class="swap" data-at="3"><span class="from">Roast Time</span><span class="to">Elapsed</span></span></div><div class="n">8:42</div></div>
+      <div class="tile t3"><div class="k"><span class="em">💨</span><span class="swap" data-at="3"><span class="from">RoR</span><span class="to">Rate of rise</span></span></div><div class="n">9.2°/min</div></div>
+      <div class="tile t4" id="t4"><div class="k"><span class="em">💥</span><span class="swap" data-at="3"><span class="from">First Crack</span><span class="to">First crack</span></span></div><div class="n">7:58</div></div>
+      <svg class="spark" id="spark" viewBox="0 0 440 44" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="#6366F1"/><stop offset=".5" stop-color="#A855F7"/><stop offset="1" stop-color="#EC4899"/></linearGradient><linearGradient id="sa" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#A855F7" stop-opacity=".35"/><stop offset="1" stop-color="#A855F7" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0 30 C30 40 50 42 80 36 S160 20 240 14 S350 6 440 4 L440 44 L0 44Z" fill="url(#sa)"/><path d="M0 30 C30 40 50 42 80 36 S160 20 240 14 S350 6 440 4" fill="none" stroke="url(#sg)" stroke-width="3"/></svg>
+      <div class="more">View Details →</div>
+      <div class="chart" id="chart"></div>
+    </div>
+  </div></div>
+</div>
+<script src="steps.js"></script>
+<script>
+// build the chart after steps.js has injected its styles: getTotalLength forces a layout, and doing it earlier
+// makes every hidden .to fade out on camera in the first 0.7s
+document.getElementById('chart').innerHTML = roastCurve({ w: 560, h: 170 });
+const act = document.querySelector('#chart .act'), L = act.getTotalLength();
+act.style.strokeDasharray = L; act.style.strokeDashoffset = L;
+Steps.init({ steps: [
+  { label: 'Stop the pulse', target: ['#status'] },
+  { label: 'Name the batch', target: ['#h3', '#sub'], hit: '#h3' },
+  { label: 'Figures, not tiles', target: ['.tile'], hit: '#t1' },
+  { label: 'Show the roast, not a bar', target: ['#prog', '#spark'], hit: '#spark' },
+  { label: 'Mark first crack', target: ['#t4'] },
+] });
+</script>
+</body></html>

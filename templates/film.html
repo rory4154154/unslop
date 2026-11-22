@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Component name</title>
+<!-- Copy to <name>.html (no leading underscore) for each component. Read references/films.md first.
+     The "before" state is the plain CSS. Each step's fix is written as .sK .thing { … }, cumulative.
+     Worked examples: examples/firstcrack/films/ (nav = icon crossfades and collapses, stats = grid → row,
+     roast = bar → drawn chart, orders = table rows → list). -->
+<link rel="stylesheet" href="frame.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<style>
+/* the plate is the white card in the middle of the 1280x800 frame. Size it to the component, never let the end state overflow. */
+.plate { width: 900px; height: 420px; }
+html.live .plate { transition: height 650ms cubic-bezier(0.3, 1.1, 0.45, 1); }
+/* the stage is the component at its real 1x size, zoomed so it reads on a phone */
+.stage { zoom: 1.6; width: 562px; height: 262px; padding: 24px; background: linear-gradient(160deg, #E4F2F0, #F3F6F6); }
+
+/* BEFORE: recreate the slop faithfully from the still */
+.card { background: #fff; border-radius: 18px; padding: 16px 18px; box-shadow: 0 8px 26px rgba(20,60,55,.10); }
+.title { font-size: 15px; font-weight: 700; letter-spacing: .14em; }
+
+/* STEP FIXES: one idea per step */
+.s1 .stage { background: #fff; }                                      /* step 1 */
+.s2 .title { font-weight: 500; letter-spacing: 0; }                   /* step 2 (text itself swaps via .swap) */
+.s4 .card { background: transparent; box-shadow: none; padding: 0; } /* step 4 */
+.s4 .plate { height: 330px; }                                        /* shrink the plate with the content */
+</style></head>
+<body>
+<div class="frame">
+  <div class="cap"><div><div class="k">Product · unslop</div><h1>Component name</h1></div><span class="count" data-counter>Before</span></div>
+  <div class="plate"><div class="stage">
+    <div class="card" id="card">
+      <div class="title" id="title"><span class="swap" data-at="2"><span class="from">🚀 NEEDS APPROVAL</span><span class="to">2 things need you</span></span></div>
+      <div id="badge" data-out="3">A thing that goes away (collapses, never just vanishes)</div>
+      <div data-in="3">A thing that arrives (grows in)</div>
+    </div>
+  </div></div>
+</div>
+<script src="steps.js"></script>
+<script>
+lucide.createIcons();
+Steps.init({ steps: [
+  // label: 2 to 5 words, said like a designer would ("Kill the glow"). target: what gets the red box. hit: where the cursor clicks (default target[0]).
+  { label: 'Kill the glow', target: ['.stage'], hit: '#card' },
+  { label: 'Say it in plain words', target: ['#title'] },
+  { label: 'Drop the badge', target: ['#badge'] },
+  { label: 'Flatten the card', target: ['#card'] },
+] });
+</script>
+</body></html>

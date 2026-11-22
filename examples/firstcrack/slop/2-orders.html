@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Orders</title>
+<link rel="stylesheet" href="slop.css"><script src="slop.js"></script>
+<style>
+.tabs { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
+.tab { height: 38px; padding: 0 14px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13.5px; color: #4B5563; background: #fff; border: 1px solid #E5E7EB; }
+.tab .n { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 7px; background: #F3F4F6; }
+.tab.on { color: #fff; background: linear-gradient(90deg, #6366F1, #8B5CF6); border-color: transparent; box-shadow: 0 6px 16px rgba(99,102,241,.35); }
+.tab.on .n { background: rgba(255,255,255,.25); }
+.tabs .search { width: 300px; margin-left: auto; height: 38px; background: #fff; }
+.tabs .b { height: 38px; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 11px; letter-spacing: .08em; color: #6B7280; font-weight: 700; background: #F9FAFB; padding: 12px 16px; border-bottom: 1px solid #E5E7EB; white-space: nowrap; }
+td { padding: 11px 16px; border-bottom: 1px solid #F3F4F6; font-size: 13.5px; white-space: nowrap; }
+td .cu { display: flex; align-items: center; gap: 10px; }
+td .cu b { display: block; font-weight: 600; } td .cu span { font-size: 12px; color: #6B7280; }
+td .av { width: 34px; height: 34px; font-size: 12px; }
+.cb { width: 16px; height: 16px; border: 1.5px solid #D1D5DB; border-radius: 4px; }
+.id { font-weight: 600; color: #6366F1; }
+.ac { display: flex; gap: 6px; } .ac span { width: 30px; height: 30px; border-radius: 8px; border: 1px solid #E5E7EB; display: grid; place-items: center; font-size: 13px; }
+.pg { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; color: #6B7280; font-size: 13px; }
+.pg .ps { display: flex; gap: 6px; } .pg .ps span { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #E5E7EB; display: grid; place-items: center; font-weight: 600; color: #374151; }
+.pg .ps .on { background: linear-gradient(135deg, #6366F1, #8B5CF6); color: #fff; border: 0; }
+</style></head><body>
+<div class="app"><aside class="side" id="side"></aside>
+<div class="main"><header class="top" id="top"></header>
+<div class="content">
+  <div class="ph"><div><h1>📦 Orders Management</h1><p>Manage and track all your wholesale orders in one place 🚀</p></div>
+    <div class="acts"><span class="b o">📤 Export CSV</span><span class="b g">➕ Create New Order</span></div></div>
+  <div class="tabs"><span class="tab on">All Orders <span class="n">48</span></span><span class="tab">⏳ Pending <span class="n">6</span></span><span class="tab">🔥 Roasting <span class="n">4</span></span><span class="tab">📦 Ready <span class="n">2</span></span><span class="tab">✅ Delivered <span class="n">26</span></span>
+    <div class="search">🔍 Search orders...</div><span class="b o">🔽 Filters</span></div>
+  <div class="card" style="overflow:hidden">
+    <table>
+      <tr><th><div class="cb"></div></th><th>ORDER ID</th><th>CUSTOMER</th><th>ITEMS</th><th>TOTAL</th><th>STATUS</th><th>DATE</th><th>ACTIONS</th></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2048</td><td><div class="cu"><span class="av">LF</span><div><b>Little Fern Café</b><span>orders@littlefern.cafe</span></div></div></td><td>5 bags</td><td><b>$142.50</b></td><td><span class="pill p-o">🔥 Roasting</span></td><td>Nov 23, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2047</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#34D399,#3B82F6)">PL</span><div><b>Paper Lantern</b><span>hello@paperlantern.co</span></div></div></td><td>10 bags</td><td><b>$265.00</b></td><td><span class="pill p-b">📦 Ready to Ship</span></td><td>Nov 23, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2046</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#FBBF24,#F97316)">ND</span><div><b>Northside Deli</b><span>sam@northsidedeli.com</span></div></div></td><td>4 bags</td><td><b>$98.00</b></td><td><span class="pill p-y">⏳ Pending</span></td><td>Nov 22, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2045</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#60A5FA,#8B5CF6)">WC</span><div><b>Wren &amp; Co</b><span>kitchen@wrenandco.com</span></div></div></td><td>8 bags</td><td><b>$212.00</b></td><td><span class="pill p-b">📦 Ready to Ship</span></td><td>Nov 22, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2044</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#F87171,#EC4899)">CT</span><div><b>The Corner Table</b><span>accounts@cornertable.co</span></div></div></td><td>6 bags</td><td><b>$151.50</b></td><td><span class="pill p-r">🚨 Payment Overdue</span></td><td>Nov 14, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2043</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#2DD4BF,#6366F1)">HB</span><div><b>Harbour Bakery</b><span>orders@harbourbakery.com</span></div></div></td><td>12 bags</td><td><b>$318.00</b></td><td><span class="pill p-p">🚚 Shipped</span></td><td>Nov 21, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2042</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#A3E635,#22C55E)">QK</span><div><b>Quayside Kitchen</b><span>hi@quayside.kitchen</span></div></div></td><td>3 bags</td><td><b>$79.50</b></td><td><span class="pill p-g">✅ Delivered</span></td><td>Nov 20, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+      <tr><td><div class="cb"></div></td><td class="id">#ORD-2041</td><td><div class="cu"><span class="av" style="background:linear-gradient(135deg,#C084FC,#F472B6)">MS</span><div><b>Moss &amp; Stone</b><span>team@mossandstone.com</span></div></div></td><td>6 bags</td><td><b>$160.00</b></td><td><span class="pill p-g">✅ Delivered</span></td><td>Nov 19, 2026</td><td><div class="ac"><span>👁️</span><span>✏️</span><span>🗑️</span></div></td></tr>
+    </table>
+    <div class="pg">Showing 1-8 of 48 results<div class="ps"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>6</span><span>›</span></div></div>
+  </div>
+</div></div></div>
+<script>slopShell('Orders', { Orders: 12 });</script>
+</body></html>

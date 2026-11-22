@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Today</title>
+<link rel="stylesheet" href="product.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script><script src="curve.js"></script>
+<style>
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; }
+.drum { background: var(--drum); color: var(--drum-ink); border-radius: 14px; padding: 20px 24px 16px; }
+.drum .hd { display: flex; align-items: baseline; gap: 12px; }
+.drum .hd b { font-weight: 500; font-size: 16px; }
+.drum .hd .mono { color: var(--drum-ink-2); font-size: 13px; }
+.drum .live { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: var(--drum-ink-2); font-size: 13px; }
+.drum .live i { width: 7px; height: 7px; border-radius: 50%; background: #E8743B; }
+.drum .figs { display: flex; gap: 48px; margin-top: 20px; align-items: baseline; }
+.drum #curve { margin-top: 16px; }
+.fig .v { font: 500 32px/1 var(--mono); letter-spacing: -0.02em; }
+.fig .v.s { font-size: 22px; }
+.fig .k { font-size: 12.5px; color: var(--drum-ink-2); margin-top: 4px; }
+.week { display: flex; gap: 56px; margin-top: 28px; }
+.week .k { font-size: 13px; color: var(--ink-3); }
+.week .v { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin-top: 2px; }
+.week .c { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+.week .c b { font-weight: 500; color: var(--up); }
+.list { display: grid; gap: 2px; }
+.it { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 12px; border-radius: 10px; margin: 0 -12px; }
+.it .t { font-weight: 500; } .it .m { font-size: 12.5px; color: var(--ink-3); }
+.it .end { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.it .amt { font: 400 13px var(--mono); color: var(--ink-2); }
+.nudge { background: var(--ember-wash); border-radius: 10px; padding: 12px 14px; margin-top: 8px; display: flex; align-items: center; gap: 12px; }
+.nudge p { font-size: 13.5px; line-height: 1.4; } .nudge p span { color: var(--ink-2); }
+.gap { height: 28px; }
+</style></head><body>
+<div class="app"><aside class="side" id="side"></aside>
+<main class="main"><header class="top" id="top"></header>
+<div class="content">
+  <div class="head"><div><h1>Monday 23 November</h1><p>3 batches after this one, 2 orders to ship</p></div><div class="acts"><span class="btn">Weekly report</span></div></div>
+  <div class="cols">
+    <div>
+      <section class="drum" aria-label="Batch in the roaster">
+        <div class="hd"><b>Guji Natural</b><span class="mono">B-1184 · 12 kg</span><span class="live"><i></i>In the drum</span></div>
+        <div class="figs"><div class="fig"><div class="v">204°C</div><div class="k">Bean temperature</div></div>
+          <div class="fig"><div class="v s">8:42</div><div class="k">Elapsed</div></div>
+          <div class="fig"><div class="v s">9.2°/min</div><div class="k">Rate of rise</div></div></div>
+        <div id="curve"></div>
+      </section>
+      <div class="week">
+        <div><div class="k">Sales this week</div><div class="v">$12.5k</div><div class="c"><b>+$1.4k</b> vs last week</div></div>
+        <div><div class="k">Orders</div><div class="v">48</div><div class="c"><b>+4</b> vs last week</div></div>
+        <div><div class="k">Roasted</div><div class="v">186 kg</div><div class="c">14 batches, 3 more than last week</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="label">Up next</div>
+      <div class="list">
+        <div class="it"><span class="sw m"></span><div><div class="t">Huila Washed</div><div class="m">12 kg, medium roast</div></div></div>
+        <div class="it"><span class="sw md"></span><div><div class="t">House Espresso</div><div class="m">15 kg, medium-dark roast</div></div></div>
+        <div class="it"><span class="sw m"></span><div><div class="t">Colombia Decaf</div><div class="m">6 kg, medium roast</div></div></div>
+      </div>
+      <div class="nudge"><p>Guji orders are up 23%<br><span>Selling faster than usual</span></p><span class="btn sm pri" style="margin-left:auto">Add batch</span></div>
+      <div class="gap"></div>
+      <div class="label">To ship</div>
+      <div class="list">
+        <div class="it"><div><div class="t">Paper Lantern</div><div class="m">10 bags</div></div><div class="end"><span class="amt">$265.00</span><span class="btn sm">Ship</span></div></div>
+        <div class="it"><div><div class="t">Wren &amp; Co</div><div class="m">8 bags</div></div><div class="end"><span class="amt">$212.00</span><span class="btn sm">Ship</span></div></div>
+      </div>
+    </div>
+  </div>
+</div></main></div>
+<script>shell('Today'); document.getElementById('curve').innerHTML = roastCurve({ w: 703, h: 236 });</script>
+</body></html>

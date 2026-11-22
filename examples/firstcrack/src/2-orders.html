@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Orders</title>
+<link rel="stylesheet" href="product.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<style>
+.bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.bar .search { margin-left: auto; width: 260px; }
+.rows { display: grid; gap: 4px; margin: 0 -16px; }
+.r { display: grid; grid-template-columns: minmax(0, 1.3fr) 100px minmax(0, 1fr) 100px 132px; align-items: center; gap: 16px; height: 56px; padding: 0 16px; border-radius: 10px; }
+.r.act { background: var(--fill); }
+.r .t { font-weight: 500; } .r .m { font: 400 12px var(--mono); color: var(--ink-3); margin-top: 2px; }
+.r .q { color: var(--ink-2); }
+.r .s { color: var(--ink-2); display: flex; align-items: center; gap: 8px; }
+.r .s.late { color: var(--ember-ink); }
+.r .s i { width: 6px; height: 6px; border-radius: 50%; background: var(--ember); }
+.r .amt { font: 400 13.5px var(--mono); text-align: right; }
+.r .go { justify-self: end; }
+.more { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; color: var(--ink-3); font-size: 13px; }
+</style></head><body>
+<div class="app"><aside class="side" id="side"></aside>
+<main class="main"><header class="top" id="top"></header>
+<div class="content">
+  <div class="head"><div><h1>Orders</h1><p>12 open, 2 ready to ship</p></div><div class="acts"><span class="btn">Export</span><span class="btn pri"><i data-lucide="plus"></i>New order</span></div></div>
+  <div class="bar"><div class="seg"><span>Open <span class="n">12</span></span><span>Delivered <span class="n">26</span></span><span class="on">All <span class="n">48</span></span></div>
+    <div class="search"><i data-lucide="search"></i>Search orders</div></div>
+  <div class="rows" id="rows"></div>
+  <div class="more"><span>8 of 48</span><span class="btn sm">Show more</span></div>
+</div></main></div>
+<script>
+const O = [
+  ['Little Fern Café','2048','23 Nov',5,'142.50','<span class="s"><i></i>Roasting</span>',''],
+  ['Paper Lantern','2047','23 Nov',10,'265.00','<span class="s">Ready to ship</span>','<span class="btn sm pri go">Mark shipped</span>'],
+  ['Northside Deli','2046','22 Nov',4,'98.00','<span class="s">Not started</span>',''],
+  ['Wren &amp; Co','2045','22 Nov',8,'212.00','<span class="s">Ready to ship</span>','<span class="btn sm pri go">Mark shipped</span>'],
+  ['The Corner Table','2044','14 Nov',6,'151.50','<span class="s late">Payment 9 days late</span>',''],
+  ['Harbour Bakery','2043','21 Nov',12,'318.00','<span class="s">Shipped 21 Nov</span>',''],
+  ['Quayside Kitchen','2042','20 Nov',3,'79.50','<span class="s">Delivered 20 Nov</span>',''],
+  ['Moss &amp; Stone','2041','19 Nov',6,'160.00','<span class="s">Delivered 19 Nov</span>',''],
+];
+document.getElementById('rows').innerHTML = O.map(([n, id, d, b, amt, st, go]) => `<div class="r${go ? ' act' : ''}"><div><div class="t">${n}</div><div class="m">#${id} · ${d}</div></div><span class="q">${b} bags</span>${st}<span class="amt">$${amt}</span>${go || '<span></span>'}</div>`).join('');
+shell('Orders');
+</script>
+</body></html>

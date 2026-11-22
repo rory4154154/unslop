@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Green Coffee</title>
+<link rel="stylesheet" href="slop.css"><script src="slop.js"></script>
+<style>
+.alert { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 14px; background: linear-gradient(90deg, #FEF3C7, #FDE68A); border: 1px solid #FCD34D; color: #92400E; font-size: 14px; margin-bottom: 20px; }
+.alert b { font-weight: 700; } .alert .x { margin-left: auto; font-size: 16px; opacity: .6; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.bean { padding: 18px 20px; }
+.bean .t { display: flex; align-items: center; gap: 12px; }
+.flag { width: 44px; height: 44px; border-radius: 12px; background: #F3F4F6; display: grid; place-items: center; font-size: 24px; }
+.bean h3 { font-size: 16px; font-weight: 700; } .bean .og { font-size: 11px; letter-spacing: .1em; font-weight: 700; color: #9CA3AF; margin-top: 2px; }
+.bean .t .pill { margin-left: auto; }
+.tags { display: flex; gap: 6px; margin-top: 14px; }
+.stock { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; }
+.stock .v { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; } .stock .p { font-size: 13px; font-weight: 600; color: #6B7280; }
+.bar { height: 9px; border-radius: 99px; background: #F3F4F6; overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #34D399, #10B981); }
+.bar.lo i { background: linear-gradient(90deg, #F87171, #F97316); }
+.ft { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12.5px; color: #6B7280; }
+.ft .b { height: 34px; padding: 0 12px; font-size: 13px; border-radius: 10px; }
+</style></head><body>
+<div class="app"><aside class="side" id="side"></aside>
+<div class="main"><header class="top" id="top"></header>
+<div class="content">
+  <div class="ph"><div><h1>🌱 Green Coffee Inventory</h1><p>Keep track of your green bean stock levels and never run out! ✨</p></div>
+    <div class="acts"><span class="b o">📥 Import</span><span class="b g">➕ Add Coffee</span></div></div>
+  <div class="alert">⚠️ <span><b>Heads up!</b> 2 coffees are running low. Reorder soon to avoid stockouts! 🚨</span><span class="x">✕</span></div>
+  <div class="grid" id="grid"></div>
+</div></div></div>
+<script>
+slopShell('Green Coffee', { Orders: 12 });
+const B = [
+  ['🇪🇹','Ethiopia Guji','ETHIOPIA','Natural','p-p', 88.5, 38, 200, 3, true],
+  ['🇰🇪','Kenya Nyeri AA','KENYA','Washed','p-b', 87.75, 54, 200, 5, true],
+  ['🇨🇴','Colombia Huila','COLOMBIA','Washed','p-b', 86.0, 142, 200, 11, false],
+  ['🇧🇷','Brazil Cerrado','BRAZIL','Pulped Natural','p-y', 84.5, 268, 300, 18, false],
+  ['🇬🇹','Guatemala Huehue','GUATEMALA','Washed','p-b', 86.5, 96, 150, 16, false],
+  ['🇨🇴','Colombia Decaf','COLOMBIA','Sugarcane EA','p-g', 84.0, 41, 60, 20, false],
+];
+document.getElementById('grid').innerHTML = B.map(([f, n, o, pr, pc, cup, kg, cap, d, lo]) => `
+  <div class="card bean"><div class="t"><div class="flag">${f}</div><div><h3>${n}</h3><div class="og">${o}</div></div>${lo ? '<span class="pill p-r">⚠️ Low Stock</span>' : '<span class="pill p-g">✅ In Stock</span>'}</div>
+  <div class="tags"><span class="pill ${pc}">${pr}</span><span class="pill p-y">⭐ ${cup} pts</span></div>
+  <div class="stock"><span class="v">${kg} kg</span><span class="p">${Math.round(kg / cap * 100)}%</span></div>
+  <div class="bar${lo ? ' lo' : ''}"><i style="width:${Math.round(kg / cap * 100)}%"></i></div>
+  <div class="ft"><span>⏳ Est. ${d} days remaining</span>${lo ? '<span class="b g">🛒 Reorder</span>' : '<span class="b o">Details →</span>'}</div></div>`).join('');
+</script>
+</body></html>

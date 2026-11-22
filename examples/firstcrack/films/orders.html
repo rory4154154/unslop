@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Order rows</title>
+<link rel="stylesheet" href="frame.css">
+<style>
+.plate { width: 936px; height: 370px; }
+html.live .plate { transition: height 650ms cubic-bezier(0.3, 1.1, 0.45, 1); }
+.stage { zoom: 1.2; width: 780px; height: 308px; padding: 20px; background: #F9FAFB; }
+.s1 .plate { height: 336px; } .s1 .stage { height: 280px; background: #fff; }
+.s3 .stage { font-family: 'Instrument Sans', sans-serif; }
+
+.tbl { background: #fff; border: 1px solid #E5E7EB; border-radius: 16px; box-shadow: 0 4px 14px rgba(17,24,39,.06); overflow: hidden; }
+.s1 .tbl { border-color: transparent; box-shadow: none; border-radius: 0; overflow: visible; }
+.row, .hd { display: flex; align-items: center; padding: 0 16px; }
+.hd { height: 38px; background: #F9FAFB; border-bottom: 1px solid #E5E7EB; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; color: #6B7280; }
+.row { height: 56px; border-bottom: 1px solid #F3F4F6; font-size: 13.5px; color: #111827; border-radius: 0; }
+.s1 .rows { display: grid; gap: 4px; }
+.s1 .row { border-bottom-color: transparent; border-radius: 10px; }
+.cb { display: block; width: 16px; height: 16px; border: 1.5px solid #D1D5DB; border-radius: 4px; margin-right: 16px; flex: none; }
+.av { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 11px; margin-right: 10px; flex: none; }
+.who { flex: 1; min-width: 0; }
+.who b { display: block; font-weight: 600; }
+.s3 .who b { font-weight: 500; }
+.who .em { display: block; font-size: 12px; color: #6B7280; }
+.s5 .who .em { font-family: var(--mono); color: var(--fc-ink-3); }
+.c-bags { width: 76px; flex: none; color: #374151; }
+.c-tot { width: 84px; flex: none; font-weight: 600; }
+.s5 .c-tot { font-family: var(--mono); font-weight: 400; font-size: 13px; }
+.c-st { width: 190px; flex: none; }
+.c-act { display: flex; justify-content: flex-end; flex: none; width: 116px; }
+.pill { display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; border-radius: 12px; padding: 4px 10px; white-space: nowrap; }
+.pill .e { display: inline-block; overflow: hidden; width: 17px; }
+.py { background: #FEF3C7; color: #B45309; } .pb { background: #DBEAFE; color: #1D4ED8; } .pr { background: #FEE2E2; color: #B91C1C; }
+.s3 .pill { background: transparent; padding: 4px 0; font-weight: 400; font-size: 13.5px; color: var(--fc-ink-2); }
+.s3 .pill .e { width: 0; opacity: 0; }
+.s3 .pill.pr { color: var(--ember-ink); }
+.ic3 { display: flex; gap: 6px; }
+.ic3 span { width: 30px; height: 30px; border-radius: 8px; border: 1px solid #E5E7EB; display: grid; place-items: center; font-size: 13px; }
+.ship { display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 8px; background: var(--fc-ink); color: #fff; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.s4 .row.ready { background: var(--fill); }
+</style></head>
+<body>
+<div class="frame">
+  <div class="cap"><div><div class="k">Firstcrack · unslop</div><h1>Order rows</h1></div><span class="count" data-counter>Before</span></div>
+  <div class="plate"><div class="stage slop">
+    <div class="tbl" id="tbl">
+      <div class="hd" id="hd" data-out="1"><span style="width:32px"></span><span style="width:42px"></span><span class="who">CUSTOMER</span><span class="c-bags">ITEMS</span><span class="c-tot">TOTAL</span><span class="c-st">STATUS</span><span class="c-act">ACTIONS</span></div>
+      <div class="rows" id="rows"></div>
+    </div>
+  </div></div>
+</div>
+<script src="steps.js"></script>
+<script>
+const R = [
+  ['PL', '#34D399,#3B82F6', 'Paper Lantern', 'hello@paperlantern.co', '#2047 · 23 Nov', 10, '$265.00', 'pb', '📦', 'Ready to Ship', 'Ready to ship', true],
+  ['ND', '#FBBF24,#F97316', 'Northside Deli', 'sam@northsidedeli.com', '#2046 · 22 Nov', 4, '$98.00', 'py', '⏳', 'Pending', 'Not started', false],
+  ['WC', '#60A5FA,#8B5CF6', 'Wren &amp; Co', 'kitchen@wrenandco.com', '#2045 · 22 Nov', 8, '$212.00', 'pb', '📦', 'Ready to Ship', 'Ready to ship', true],
+  ['CT', '#F87171,#EC4899', 'The Corner Table', 'accounts@cornertable.co', '#2044 · 14 Nov', 6, '$151.50', 'pr', '🚨', 'Payment Overdue', 'Payment 9 days late', false],
+];
+document.getElementById('rows').innerHTML = R.map(([ini, g, n, em, id, b, tot, pc, e, st, st2, ready], i) => `
+  <div class="row${ready ? ' ready' : ''}" id="r${i}">
+    <span data-out="2" data-axis="x"><span class="cb"></span></span>
+    <span data-out="2" data-axis="x"><span class="av" style="background:linear-gradient(135deg,${g})">${ini}</span></span>
+    <div class="who"><b>${n}</b><span class="em"><span class="swap" data-at="5"><span class="from">${em}</span><span class="to">${id}</span></span></span></div>
+    <span class="c-bags">${b} bags</span><span class="c-tot">${tot}</span>
+    <span class="c-st"><span class="pill ${pc}"><span class="e">${e}</span><span class="swap" data-at="3"><span class="from">${st}</span><span class="to">${st2}</span></span></span></span>
+    <span class="c-act"><span data-out="4" data-axis="x"><span class="ic3"><span>👁️</span><span>✏️</span><span>🗑️</span></span></span>${ready ? '<span data-in="4" data-axis="x"><span class="ship">Mark shipped</span></span>' : ''}</span>
+  </div>`).join('');
+Steps.init({ steps: [
+  { label: 'Lines out, space in', target: ['#hd', '#r0'], hit: '#r0' },
+  { label: 'No checkboxes, no gradient avatars', target: ['#r0 .av', '#r1 .av', '#r2 .av', '#r3 .av'], hit: '#r0 .av' },
+  { label: 'Say the status in words', target: ['#r0 .pill', '#r3 .pill'], hit: '#r3 .pill' },
+  { label: 'One action, only where it applies', target: ['#r0 .c-act', '#r2 .c-act'], hit: '#r0 .c-act' },
+  { label: 'Order number, not email', target: ['#r0 .em', '#r1 .em', '#r2 .em', '#r3 .em'], hit: '#r1 .em' },
+] });
+</script>
+</body></html>

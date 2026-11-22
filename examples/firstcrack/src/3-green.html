@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Green coffee</title>
+<link rel="stylesheet" href="product.css">
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="chrome.js"></script>
+<style>
+.cols, .r { display: grid; grid-template-columns: minmax(0, 1fr) 90px 150px 180px 150px 112px; align-items: center; gap: 24px; padding: 0 16px; }
+.cols { color: var(--ink-3); font-size: 12.5px; height: 28px; margin: 0 -16px 4px; }
+.cols .rt, .r .rt { text-align: right; }
+.rows { display: grid; gap: 4px; margin: 0 -16px; }
+.r { height: 72px; border-radius: 10px; }
+.r.low { background: var(--ember-wash); }
+.r .t { font-weight: 500; } .r .m { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+.r .num { font: 400 13.5px var(--mono); }
+.r .num span { color: var(--ink-3); }
+.track { height: 4px; background: var(--fill-2); }
+.track i { display: block; height: 100%; background: var(--ink-2); }
+.low .track { background: rgba(196,80,26,.16); } .low .track i { background: var(--ember); }
+.r .left { color: var(--ink-2); } .low .left { color: var(--ember-ink); }
+.r .go { justify-self: end; }
+</style></head><body>
+<div class="app"><aside class="side" id="side"></aside>
+<main class="main"><header class="top" id="top"></header>
+<div class="content">
+  <div class="head"><div><h1>Green coffee</h1><p>639 kg across 6 coffees. Guji and Kenya run out this week</p></div><div class="acts"><span class="btn">Import</span><span class="btn pri"><i data-lucide="plus"></i>Add coffee</span></div></div>
+  <div class="cols"><span>Coffee</span><span class="rt">Cup score</span><span class="rt">In stock</span><span></span><span>Runs out</span><span></span></div>
+  <div class="rows" id="rows"></div>
+</div></main></div>
+<script>
+const B = [
+  ['Ethiopia Guji','Natural', '88.5', 38, 200, 3],
+  ['Kenya Nyeri AA','Washed', '87.75', 54, 200, 5],
+  ['Colombia Huila','Washed', '86', 142, 200, 11],
+  ['Guatemala Huehuetenango','Washed', '86.5', 96, 150, 16],
+  ['Brazil Cerrado','Pulped natural', '84.5', 268, 300, 18],
+  ['Colombia Decaf','Sugarcane decaf', '84', 41, 60, 20],
+];
+document.getElementById('rows').innerHTML = B.map(([n, o, cup, kg, cap, d]) => { const low = d <= 7;
+  return `<div class="r${low ? ' low' : ''}"><div><div class="t">${n}</div><div class="m">${o}</div></div><span class="num rt">${cup}</span><span class="num rt">${kg} kg <span>of ${cap}</span></span><div class="track"><i style="width:${Math.round(kg / cap * 100)}%"></i></div><span class="left">${low ? 'In about ' : 'About '}${d} days</span>${low ? '<span class="btn sm ember go">Reorder</span>' : '<span></span>'}</div>`; }).join('');
+shell('Green coffee');
+</script>
+</body></html>

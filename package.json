@@ -1,0 +1,7 @@
+{
+  "name": "unslop-skill",
+  "private": true,
+  "type": "module",
+  "description": "Engine dependencies for the unslop skill (screen renders and step films).",
+  "dependencies": { "playwright": "^1.50.0" }
+}

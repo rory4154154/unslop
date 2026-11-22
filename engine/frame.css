@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500;600&display=block');
+/* 1280x800 video frame: a quiet grey bench, the component on a plate in the middle, title top left, step count top right.
+   PER PRODUCT: swap the @import above for the product's own typeface (and body font-family below),
+   and set --live / --live-ink / --live-wash / --waiting to the product's brand colour sampled from the recording.
+   Keep the ::after credit: the step-morph technique is CC BY 4.0 (@heydamir). */
+:root {
+  --bench: #ECEDEF;
+  --ink: #141525; --ink-2: #474A57; --ink-3: #676A76; --ink-4: #ABADB5;
+  --hairline: rgba(20,21,37,.07); --hairline-2: rgba(20,21,37,.12);
+  --canvas: #FAFAF9; --panel: #FFFFFF; --well: #F4F4F2;
+  --live: #31C9B4; --live-ink: #0B6E61; --live-wash: #E4F7F3; --waiting: #A8570C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1280px; height: 800px; overflow: hidden; background: var(--bench); }
+body { font-family: var(--font, 'DM Sans'), system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; font-feature-settings: 'tnum' 1; }
+svg.lucide { stroke-width: 1.7; flex: none; }
+.frame { position: relative; width: 1280px; height: 800px; }
+.cap { position: absolute; left: 56px; top: 44px; right: 56px; display: flex; align-items: baseline; justify-content: space-between; }
+.cap .k { font: 500 13px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.cap h1 { font-size: 30px; font-weight: 500; letter-spacing: -0.03em; margin-top: 10px; }
+.cap .count { font: 500 15px/1 'IBM Plex Mono', monospace; color: var(--ink-2); background: #fff; border-radius: 999px; padding: 9px 14px; box-shadow: 0 0 0 1px var(--hairline-2); }
+.plate { position: absolute; left: 50%; top: calc(50% + 48px); transform: translate(-50%, -50%); background: var(--panel); border-radius: 20px; box-shadow: 0 0 0 1px var(--hairline-2), 0 10px 30px rgba(20,21,37,.06); overflow: hidden; }
+.stage { position: relative; }
+.ico { display: grid; place-items: center; }
+
+.frame::after { content: 'Step morph after unslop by @heydamir (CC BY 4.0)'; position: absolute; right: 56px; bottom: 24px; font: 400 12px/1 'IBM Plex Mono', monospace; color: var(--ink-3); opacity: .7; }

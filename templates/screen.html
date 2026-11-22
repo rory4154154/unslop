@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Screen name</title>
+<!-- Screen rebuild starter. Copy to <n>-<name>.html, matching the still's name in before/ (e.g. 1-home.html ↔ before/1-home.png).
+     Put shared tokens and the app shell in one product.css + chrome.js once there are 2+ screens (see examples/firstcrack/src/product.css + chrome.js).
+     Rules: references/rules.md. No dividers by default. Only data visible on the matching before screen. -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=block'); /* the product's own font */
+:root {
+  /* one neutral ramp + one brand colour sampled from the recording (ffmpeg crop=1:1:x:y on a still) */
+  --page: #FFFFFF; --shell: #F8F8F7; --fill: #F2F2F0; --fill-2: #EAEAE7;
+  --ink: #141525; --ink-2: #4A4D59; --ink-3: #6A6D78;
+  --brand: #31C9B4; --brand-ink: #0B6E61; --waiting: #A8570C;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px;  /* nested radii: inner = outer - padding */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1440px; height: 800px; overflow: hidden; background: var(--page); }
+body { font: 400 14px/1.5 'DM Sans', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; font-feature-settings: 'tnum' 1; }
+/* weights 400 and 500 only. Hierarchy from size and colour. */
+h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+/* separation: space and one tone step (--shell vs --page), never border-bottom / hr */
+.app { display: grid; grid-template-columns: 64px minmax(0, 1fr); height: 100%; background: var(--shell); }
+.main { background: var(--page); border-radius: var(--r-lg) 0 0 0; padding: 40px 48px; }
+.row { background: var(--fill); border-radius: var(--r-md); padding: 12px 16px; }
+</style></head>
+<body>
+<div class="app">
+  <nav aria-label="Main"></nav>
+  <main class="main"><h1>Screen title</h1></main>
+</div>
+</body></html>
